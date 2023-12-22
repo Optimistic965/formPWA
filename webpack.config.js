@@ -29,7 +29,7 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: ['html-loader'],
+                loader: 'html-loader',
             },
             {
                 test: /\.(svg|png|jpg|jpeg|gif)$/i,
@@ -45,9 +45,13 @@ module.exports = {
         new CleanWebpackPlugin()
     ],
     devServer: {
-        static: path.join(__dirname, 'dist'),
+        static: {
+            directory: path.join(__dirname, 'dist')
+        },
         port: 3030,
         open: true,
-        hot: true
+        hot: true,
+        compress: true,
+        historyApiFallback: true
     }
 }

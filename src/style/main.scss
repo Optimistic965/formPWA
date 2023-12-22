@@ -8,5 +8,394 @@
 }
 
 body {
+    background-color: $magnolia;
+    font-family: Ubuntu_regular;
+}
+
+main.form_cont{
+    width: 50%;
+    height: 70Vh;
+    margin: 0 auto;
+    margin-top: 15vh;
     background-color: $white;
+    border-radius: 10px;
+    padding: .6em;
+    display: flex;
+    box-shadow: .1em .1em .4em 2px $light_neutral;
+
+    aside{
+        width: 30%;
+        height: 100%;
+        background-image: url('../assets/images/bg-sidebar-desktop.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+        padding: 1.3em;
+
+        ul{
+            width: 100%;
+            height: 100%;
+            list-style-type: none;
+
+            li{
+                display: flex;
+                margin-bottom: 1em;
+                justify-content: space-between;
+                align-items: center;
+
+                .item_pos{
+                    width: 20%;
+                    height: 80%;
+                    border-radius: 20px;
+                    background-color: transparent;
+                    color: $white;
+                    text-align: center;
+                    font-size: .8em;
+                    font-weight: 700;
+                    padding: 7px;
+                    cursor: pointer;
+                    border: 1px solid $light_neutral;
+
+                    &.active{
+                        background-color: $light_blue;
+                        color: $purplish_blue;
+                        border-color: $light_blue;
+                    }
+                }
+
+                .step_info{
+                    width: 65%;
+                    height: 100%;
+
+                    p.step_num{
+                        font-size: .5em;
+                        font-weight: 500;
+                        color: $light_neutral;
+                        margin-bottom: .2em;
+                        text-transform: uppercase;
+                    }
+
+                    h2.step_title{
+                        font-size: .7em;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+    section.form_field{
+        font-family: Ubuntu_regular;
+        width: 70%;
+        height: 100%;
+        padding: 1em 4em;
+
+        #stepOne_cont{
+            width: 100%;
+            height: 88%;
+
+            header{
+                width: 100%;
+                height: 5em;
+                padding-top: .9em;
+
+                h1{
+                    font-size: 1.4em;
+                    color: $marine_blue;
+                    margin-bottom: .3em;
+                }
+
+                h3{
+                    font-size: .7em;
+                    color: $grey;
+                }
+            }
+
+            form{
+                font-family: Ubuntu_regular;
+
+                div.input_cont {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 1em;
+
+                    label{
+                        font-size: .81em;
+                        font-weight: 700;
+                        margin-bottom: .3em;
+                        color: $marine_blue;
+                        display: flex;
+                        justify-content: space-between;
+
+                        .error_msg{
+                            color: $strawberry_red;
+                            font-size: .78em;
+                            display: none;
+                        }
+                    }
+
+                    input{
+                        width: 100%;
+                        height: 2.5em;
+                        border-radius: 6px;
+                        outline: none;
+                        border: 1px solid $light_neutral;
+                        padding-inline: 1em;
+                        color: $marine_blue;
+                        font-weight: 500;
+
+                        &::placeholder{
+                            color: $grey;
+                            font-weight: 700;
+                        }
+
+                        &:focus{
+                            border: 1px solid $marine_blue;
+                            color: $marine_blue;
+                        }
+
+                        &.error{
+                            border: 1px solid $strawberry_red;
+                        }
+                    }
+                }
+            }
+        }
+
+        #stepTwo_cont{
+            width: 100%;
+            height: 88%;
+
+            header{
+                width: 100%;
+                height: 5em;
+                padding-top: .9em;
+
+                h1{
+                    font-size: 1.4em;
+                    color: $marine_blue;
+                    margin-bottom: .3em;
+                }
+
+                h3{
+                    font-size: .7em;
+                    color: $grey;
+                }
+            }
+
+            .plan_cont{
+                width: 100%;
+                height: 38%;
+                display: flex;
+                gap: .7em;
+
+                .plan{
+                    width: calc((100% - 1.4em)/3);
+                    border-radius: 8px;
+                    padding: 1em;
+                    border: 1px solid $light_neutral;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+
+                    .img_cont{
+                        width: 25px;
+                        // background-color: blue;
+                        height: 25px;
+
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                        }
+                    }
+
+                   .holder{
+                        .plan_info{
+                            .plan_name{
+                                font-size: .8em;
+                                color: $marine_blue;
+                            }
+
+                            .plan_price{
+                                font-size: .6em;
+                                font-weight: 600;
+                                color: $light_neutral;
+                                margin-block: .1em;
+                            }
+                        }
+
+                        .promo{
+                            font-size: .6em;
+                            font-weight: 600;
+                            color: $marine_blue;
+                        }
+                    }
+
+                    &.active {
+                        border-color: $marine_blue;
+                        background-color: $alabaster;
+                    }
+                }
+            }
+
+            .duration_control{
+                height: 2.3em;
+                width: 100%;
+                background-color: $magnolia;
+                margin-top: 1.3em;
+                border-radius: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                p{
+                    font-size: .7em;
+                    font-weight: 600;
+                    color: $grey;
+                    margin-right: 1em;
+                }
+
+                p.active{
+                    color: $marine_blue;
+                }
+
+                .input_cont + p {
+                    margin-right: 0;
+                    margin-left: 1em;
+                }
+
+                .input_cont{
+                    width: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+
+                    .toggle{
+                        width: 80%;
+                        height: 20px;
+                        border-radius: 100px;
+                        cursor: pointer;
+                        position: relative;
+                        background: $marine_blue;
+                        transition: 0.5s;
+                    }
+
+                    .toggle::before{
+                        content: '';
+                        position: absolute;
+                        background: $white;
+                        width: 40%;
+                        height: 14px;
+                        border-radius: 100px;
+                        margin: 3px;
+                        transition: 0.5s;
+                    }
+
+                    input{
+                        display: none;
+                    }
+
+                    input:checked + .toggle::before{
+                        transform: translateX(110%);
+                    }
+                }
+            }
+        }
+
+        #stepThree_cont{
+            width: 100%;
+            height: 88%;
+
+            header{
+                width: 100%;
+                height: 5em;
+                padding-top: .9em;
+
+                h1{
+                    font-size: 1.4em;
+                    color: $marine_blue;
+                    margin-bottom: .3em;
+                }
+
+                h3{
+                    font-size: .7em;
+                    color: $grey;
+                }
+            }
+
+            .addOn_cont{
+                background-color: red;
+                height: 60%;
+            }
+        }
+
+        #stepFour_cont{
+            width: 100%;
+            height: 88%;
+
+            header{
+                width: 100%;
+                height: 5em;
+                padding-top: .9em;
+
+                h1{
+                    font-size: 1.4em;
+                    color: $marine_blue;
+                    margin-bottom: .3em;
+                }
+
+                h3{
+                    font-size: .7em;
+                    color: $grey;
+                }
+            }
+        }
+
+        .btn_cont{
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            button{
+                width: 26%;
+                height: 95%;
+                border: none;
+                background-color: red;
+                font-family: Ubuntu_regular;
+                font-weight: 600;
+                border-radius: 7px;
+                background-color: $white;
+                text-transform: capitalize;
+                position: relative;
+                cursor: pointer;
+
+                &.back{
+                    color: $grey;
+                    
+                    &.hide{
+                        display: none;
+                    }
+                }
+
+                &.next{
+                    color: $alabaster;
+                    background-color: $marine_blue;
+                }
+            }
+
+            &.hide{
+                justify-content: right;    
+            }
+        }
+
+        #stepOne_cont.hide, #stepTwo_cont.hide, #stepThree_cont.hide, #stepFour_cont.hide{
+            display: none;
+        }
+    }
 }
