@@ -328,8 +328,61 @@ main.form_cont{
             }
 
             .addOn_cont{
-                background-color: red;
+                // background-color: red;
                 height: 60%;
+                display: flex;
+                flex-direction: column;
+                // gap: 1ex;
+                justify-content: space-between;
+
+                .addOn{
+                    width: 100%;
+                    height: 65px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: 1px solid $light_neutral;
+                    border-radius: 8px;
+                    padding: .8em;
+
+                    .input_cont{
+                        width: 60%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+
+                        .input input[type="checkbox"] {
+                            // outline: 1px solid $grey;
+                            border: 1px solid red;
+                        }
+
+                        .addOn_info{
+                            margin-left: 1em;
+                            h2{
+                                font-size: .85em;
+                                color: $marine_blue;
+                                font-weight: 600;
+                                margin-bottom: .35em;
+                            }
+
+                            p{
+                                font-size: .65em;
+                                color: $light_neutral;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    .addon_price p{
+                        font-size: .7em;
+                        color: $purplish_blue;
+                        font-weight: 600;
+                    }
+
+                    &.addOn_checked {
+                        background: $magnolia;
+                    }
+                }
             }
         }
 
