@@ -1,3 +1,4 @@
+import valiate from "./validate"
 // Elements selection
 // FormSection containers
 const firstSection = document.getElementById('stepOne_cont')
@@ -87,8 +88,9 @@ export default function navigate () {
     }
 
     nextBtn.addEventListener('click', () => {
+        const validateRes = valiate(activeSection)
         // add 1 to active section
-        if (activeSection !== 4) {
+        if (validateRes && activeSection !== 4) {
             // increase active section num
             activeSection++
             // set appropriate form section to view
