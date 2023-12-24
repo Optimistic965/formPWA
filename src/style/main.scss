@@ -350,7 +350,7 @@ main.form_cont{
                     padding: .8em;
 
                     .input_cont{
-                        width: 60%;
+                        width: 70%;
                         height: 100%;
                         display: flex;
                         align-items: center;
@@ -603,6 +603,14 @@ main.form_cont{
 @media screen and (max-width: 756px) {
     main.form_cont{
         width: 100%;
+
+        aside{
+            width: 40%;
+        }
+
+        section.form_field, section.appreciation{
+            padding: 1em;
+        }
     }
 }
 
@@ -624,7 +632,7 @@ main.form_cont{
             ul {
                 display: flex;
                 width: 65%;
-                height: 40%;
+                height: 30%;
                 margin: 0 auto;
                 justify-content: space-evenly;
                 align-items: center;
@@ -651,7 +659,7 @@ main.form_cont{
         section.form_field, section.appreciation{
             position: relative;
             height: 60%;
-            width: 70%;
+            min-width: 70%;
             margin: 0 auto;
             top: -7em;
             border-radius: 8px;
@@ -699,6 +707,34 @@ main.form_cont{
                 }
             }
 
+            #stepThree_cont{
+                height: 100%;
+                // font-size: 1.3em;
+
+                .addOn_cont{
+                    height: 70%;
+
+                    .addOn{
+                        height: 6em;
+
+                        .input_cont{
+                            width: 80%;
+                            padding-block: .2em;
+                        }
+                    }
+                }
+            }
+
+            #stepFour_cont{
+                height: 100%;
+                // background-color: red;
+                font-size: 1.3em;
+
+                .summary_cont, .addOn_cont{
+                    height: 50%;
+                }
+            }
+
             .btn_cont{
                 background-color: $white;
                 bottom: 0;
@@ -708,6 +744,18 @@ main.form_cont{
                 width: 100%;
                 padding: 1em;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 333px) {
+    main.form_cont {
+
+        aside ul {
+            width: 80%;
+        }
+        section.form_field, section.appreciation{
+            width: 90%;
         }
     }
 }
