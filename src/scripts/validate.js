@@ -6,6 +6,7 @@ const email = document.querySelector('input#email')
 const phNum = document.querySelector('input#number')
 const planCont = document.querySelector('.plan_cont')
 const plans = document.querySelectorAll('.plan_cont .plan')
+const addOns = document.querySelectorAll('.addOn_cont .addOn')
 const yearlyControl = document.querySelector('.duration_control #yearly')
 const monthlyControl = document.querySelector('.duration_control #monthly')
 const duration = document.querySelector('.duration_control input[type=checkbox]')
@@ -16,27 +17,28 @@ const retrieveData = JSON.parse(localStorage.getItem('FormPWA'))
 
 let selectedDuration = 'monthly'
 let selectedPlan = {}
+let selectedAddOn = []
 
 const planDurationprice = {
     'monthly': {
         'Arcade': 9,
         'Advance': 12,
         'Pro': 15,
-        'online_service': 1,
-        'larger_store': 2,
-        'customized_profile': 2
+        'Online service': 1,
+        'Larger storage': 2,
+        'Customizable Profile': 2
     },
     'yearly': {
         'Arcade': 90,
         'Advance': 120,
         'Pro': 150,
-        'online_service': 10,
-        'larger_store': 20,
-        'customized_profile': 20
+        'Online service': 10,
+        'Larger storage': 20,
+        'Customizable Profile': 20
     }
 }
 
-const changePlanPrice = (duration) => {
+const changePrices = (duration) => {
     plans.forEach(plan => {
         const planName = plan.querySelector('.plan_name').textContent
         const planPrice = plan.querySelector('.plan_price')
@@ -49,6 +51,17 @@ const changePlanPrice = (duration) => {
             planPrice.textContent = `$${planDurationprice[duration][planName]}/mo`
             promo.style.display = 'none'
         }
+    })
+
+    addOns.forEach(addOn => {
+        const addOnPrice = addOn.querySelector('.addon_price p')
+        const addOnName = addOn.querySelector('.addOn_info h2').textContent
+        if (duration === 'yearly') {
+            addOnPrice.textContent = `$${planDurationprice[duration][addOnName]}/yr` 
+        } else {
+            addOnPrice.textContent = `$${planDurationprice[duration][addOnName]}/mo`
+        }
+
     })
 }
 
@@ -106,6 +119,7 @@ if (retrieveData !== null) {
     email.value = retrieveData?.['Email']
     phNum.value = retrieveData?.['Phone-number']
     if (retrieveData.plan) {
+        selectedPlan = retrieveData.plan
         plans.forEach(plan => {
             const planName = plan.querySelector('.plan_name').textContent
             if (planName === retrieveData.plan.planName) {
@@ -115,8 +129,22 @@ if (retrieveData !== null) {
         })
     }
     if (retrieveData.duration) {
-        changePlanPrice(retrieveData.duration)
+        changePrices(retrieveData.duration)
         retrieveData.duration === 'yearly' ? duration.checked = true : duration.checked = false
+    }
+    if (retrieveData.addOn) {
+        selectedAddOn = retrieveData.addOn
+        addOns.forEach(addOn => {
+            const addOnName = addOn.querySelector('.addOn_info h2').textContent
+            const checkbox = addOn.querySelector('input[type=checkbox]')
+
+            for (let i = 0; i < retrieveData.addOn.length; i++) {
+                if (retrieveData.addOn[i].addOnName === addOnName) {
+                    checkbox.checked = true
+                    addOn.classList.add('addOn_checked')
+                }
+            }
+        })
     }
 }
 
@@ -138,15 +166,22 @@ duration.addEventListener('change', (e) => {
         selectedDuration = 'yearly'
         yearlyControl.classList.add('active')
         monthlyControl.classList.remove('active')
-        changePlanPrice('yearly')
+        changePrices('yearly')
         manageState('duration', 'yearly')
     } else {
         selectedDuration = 'monthly'
         yearlyControl.classList.remove('active')
         monthlyControl.classList.add('active')
-        changePlanPrice('monthly')
+        changePrices('monthly')
         manageState('duration', 'monthly')
     }
+    selectedAddOn = []
+    manageState('addOn', [])
+    addOns.forEach(addOn => {
+        addOn.classList.remove('addOn_checked')
+        addOn.querySelector('input[type=checkbox]').checked = false
+    })
+    removeActive(plans)
 })
 
 for (let plan of plans) {
@@ -159,6 +194,26 @@ for (let plan of plans) {
             'planAmount': planDurationprice[selectedDuration][clickedPlan],
         }
         manageState('plan', selectedPlan)
+    })
+}
+
+for (let addOn of addOns) {
+    const checkbox = addOn.querySelector('input[type=checkbox]')
+    const addOnName = addOn.querySelector('.addOn_info h2').textContent
+    checkbox.addEventListener('change', (e) => {
+        if (e.target.checked){
+            addOn.classList.add('addOn_checked')
+            selectedAddOn.push({
+                addOnName,
+                'addOnPrice': planDurationprice[selectedDuration][addOnName]
+            })
+        } else {
+            addOn.classList.remove('addOn_checked')
+            const newArry = selectedAddOn.filter((add) => add.addOnName !== addOnName)
+            selectedAddOn = newArry
+        }
+
+        manageState('addOn', selectedAddOn)
     })
 }
 
