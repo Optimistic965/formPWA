@@ -11,6 +11,7 @@ const yearlyControl = document.querySelector('.duration_control #yearly')
 const monthlyControl = document.querySelector('.duration_control #monthly')
 const duration = document.querySelector('.duration_control input[type=checkbox]')
 
+
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const phoneNumberRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 const retrieveData = JSON.parse(localStorage.getItem('FormPWA'))
@@ -74,8 +75,9 @@ function displayErrMsg (currentEle) {
     }, 2000)
 }
 
-function valiate (activeSection) {
+export function valiate (activeSection) {
     // Validate all input field before moving on to the next
+    // console.log(activeSection)
     switch(activeSection) {
         case 1:
             // check for name first
@@ -108,9 +110,34 @@ function valiate (activeSection) {
                 }, 2000)
                 return false
             }
+        case 3:
+            if (Object.keys(selectedPlan).length > 1) {
+                return true
+            } else {
+                return false
+            }
+        case 4:
+            if (retrieveData !== null && Object.keys(retrieveData).length >= 5) {
+                return true
+            } else {
+                return false
+            }
+        default:
+            return true
     }
 
     return "ABCDEF"
+}
+
+export function clearAllField () {
+    name.value = ''
+    email.value = ''
+    phNum.value = ''
+    selectedDuration = 'monthly'
+    selectedPlan = {}
+    selectedAddOn = []
+    removeActive(plans)
+    addOns.forEach(addOn => addOn.classList.remove('addOn_checked'))
 }
 
 //Setting value if available
@@ -129,8 +156,10 @@ if (retrieveData !== null) {
         })
     }
     if (retrieveData.duration) {
+        selectedDuration = retrieveData.duration
         changePrices(retrieveData.duration)
         retrieveData.duration === 'yearly' ? duration.checked = true : duration.checked = false
+        // summaryPlanPrice.textContent = `$${planDurationprice[duration][addOnName]}/yr`
     }
     if (retrieveData.addOn) {
         selectedAddOn = retrieveData.addOn
@@ -216,5 +245,3 @@ for (let addOn of addOns) {
         manageState('addOn', selectedAddOn)
     })
 }
-
-export default valiate
