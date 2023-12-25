@@ -17,8 +17,8 @@ const backBtn = document.querySelector('button#back')
 let activeSection = 1
 
 // Remove className "active" from all sidebar navigator
-function removeActive () {
-    for ( let control of allControls) {
+export function removeActive (arr) {
+    for ( let control of arr) {
         control.classList.remove('active')
     }
 }
@@ -76,14 +76,17 @@ function changeCurrentSection (section) {
 export default function navigate () {
     for (let i = 0; i < allControls.length; i++) {
         allControls[i].addEventListener('click', () => {
-            // remove "active" from it's other navigator
-            removeActive()
-            // add "active" to classname
-            allControls[i].classList.add('active')
-            // update active section value
-            activeSection = i + 1
-            // set appropriate form section to view
-            changeCurrentSection(Number(allControls[i].textContent))
+            const validateRes = valiate(i)
+            if (validateRes) {
+                // remove "active" from it's other navigator
+                removeActive(allControls)
+                // add "active" to classname
+                allControls[i].classList.add('active')
+                // update active section value
+                activeSection = i + 1
+                // set appropriate form section to view
+                changeCurrentSection(Number(allControls[i].textContent))
+            }
         })
     }
 
@@ -96,7 +99,7 @@ export default function navigate () {
             // set appropriate form section to view
             changeCurrentSection(activeSection)
             // remove "active" from it's other navigator
-            removeActive()
+            removeActive(allControls)
             // add "active" to classname
             allControls[activeSection - 1].classList.add('active')
         }
@@ -110,7 +113,7 @@ export default function navigate () {
             // set appropriate form section to view
             changeCurrentSection(activeSection)
             // remove "active" from it's other navigator
-            removeActive()
+            removeActive(allControls)
             // add "active" to classname
             allControls[activeSection - 1].classList.add('active')
         }

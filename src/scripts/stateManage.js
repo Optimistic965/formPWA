@@ -13,7 +13,6 @@ export default function manageState (info, userValue) {
     }
     //name, email, phoneNumber, plan, duration, addOns
     const res = localStorage.setItem('FormPWA', JSON.stringify(userCheckoutData))
-    console.log(res)
 
     return "state connected"
 }
