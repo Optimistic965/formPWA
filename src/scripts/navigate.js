@@ -113,16 +113,18 @@ function changeCurrentSection (section) {
 }
 
 export default function navigate () {
-    const getData = localStorage.getItem('FormPWA')
+    const getData = JSON.parse(localStorage.getItem('FormPWA'))
     for (let i = 0; i < allControls.length; i++) {
         allControls[i].addEventListener('click', () => {
-            formContent.classList.remove('hide')
-            successPage.classList.add('hide')
+            const validateRes = valiate(i)
             if (getData === null) {
                 changeCurrentSection(1)
-            }
-            const validateRes = valiate(i)
-            if (validateRes) {
+                removeActive(allControls)
+                allControls[0].classList.add('active')
+                formContent.classList.remove('hide')
+                successPage.classList.add('hide')
+                activeSection = 1
+            } else if (validateRes) {
                 // remove "active" from it's other navigator
                 removeActive(allControls)
                 // add "active" to classname
@@ -141,13 +143,20 @@ export default function navigate () {
     nextBtn.addEventListener('click', () => {
         const validateRes = valiate(activeSection)
         // add 1 to active section
-        if (validateRes && activeSection !== 5) {
+        if (validateRes && activeSection !== 6) {
             // formContent.classList.remove('hide')
             // successPage.classList.add('hide')
             // increase active section num
             activeSection++
             // set appropriate form section to view
-            console.log(activeSection)
+            if (activeSection === 5) {
+                formContent.classList.add('hide')
+                successPage.classList.remove('hide')
+                localStorage.removeItem('FormPWA')
+                clearAllField()
+                console.log('shown entering successPage')
+                return
+            }
             changeCurrentSection(activeSection)
             // remove "active" from it's other navigator
             removeActive(allControls)
@@ -155,13 +164,6 @@ export default function navigate () {
             allControls[activeSection - 1]?.classList.add('active')
             if (activeSection === 4) {
                 setSummaryData()
-            }
-            if (activeSection === 5) {
-                formContent.classList.add('hide')
-                successPage.classList.remove('hide')
-                localStorage.removeItem('FormPWA')
-                clearAllField()
-                console.log('shown entering successPage')
             }
         }
     })

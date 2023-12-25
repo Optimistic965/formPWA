@@ -78,6 +78,7 @@ function displayErrMsg (currentEle) {
 export function valiate (activeSection) {
     // Validate all input field before moving on to the next
     // console.log(activeSection)
+    const data = JSON.parse(localStorage.getItem('FormPWA'))
     switch(activeSection) {
         case 1:
             // check for name first
@@ -117,7 +118,7 @@ export function valiate (activeSection) {
                 return false
             }
         case 4:
-            if (retrieveData !== null && Object.keys(retrieveData).length >= 5) {
+            if (data !== null && Object.keys(data).length >= 5) {
                 return true
             } else {
                 return false
@@ -125,8 +126,6 @@ export function valiate (activeSection) {
         default:
             return true
     }
-
-    return "ABCDEF"
 }
 
 export function clearAllField () {
@@ -215,6 +214,7 @@ duration.addEventListener('change', (e) => {
 
 for (let plan of plans) {
     plan.addEventListener('click', () => {
+        manageState('duration', selectedDuration)
         removeActive(plans)
         plan.classList.add('active')
         const clickedPlan = plan.querySelector('.plan_name').textContent
