@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "open": "http-server -0 /public/index.html -c-1"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",

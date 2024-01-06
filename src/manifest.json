@@ -1,0 +1,35 @@
+{
+    "name": "Form with progressive web app Features",
+    "short_name": "PWAForm",
+    "start_url": "/src/index.html",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#f0f6ff",
+    "theme_color": "#02295a",
+    "description": "Multistep form with state management and mobile device features",
+    "dir": "ltr",
+    "lang": "en-US",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/src/assets/images/favicon.png",
+            "size": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/src/assets/images/favicon.png",
+            "size": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/src/assets/images/favicon.png",
+            "size": "288x288",
+            "type": "image/png"
+        },
+        {
+            "src": "/src/assets/images/favicon.png",
+            "size": "576x576",
+            "type": "image/png"
+        }
+    ]
+}
